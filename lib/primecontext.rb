@@ -1,5 +1,4 @@
-require 'uri'
-require 'net/http'
+require 'primecontext/api'
 
 module Primecontext
 

@@ -1,3 +1,7 @@
+require 'uri'
+require 'net/http'
+require 'openssl'
+
 module Primecontext
 
   class Api
@@ -23,7 +27,7 @@ module Primecontext
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      http.request_post(uri.request_uri, data.to_param)
+      http.request_post(uri.request_uri, URI.encode_www_form(data))
     end
   end
 
