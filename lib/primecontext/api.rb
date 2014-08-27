@@ -13,9 +13,9 @@ module Primecontext
     end
 
     def new_record(data = {})
-      @data = @data.merge(data)
-      @data.merge!({ 'sign' => generate_sign(@data) })
-      send_request(data)
+      @data = @data.merge(Hash[data.map{ |(k,v)| [k.to_sym, v] }])
+      @data.merge!({ sign: generate_sign(@data) })
+      send_request(@data)
     end
 
     def generate_sign(data)
