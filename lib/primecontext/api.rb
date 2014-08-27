@@ -17,7 +17,7 @@ module Primecontext
     end
 
     def generate_sign(data)
-      data_str = data.sort.join.downcase
+      data_str = data.sort.join.mb_chars.downcase
       digest = OpenSSL::Digest.new 'sha256'
       OpenSSL::HMAC.hexdigest digest, @options[:secret_key], data_str
     end
