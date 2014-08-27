@@ -5,14 +5,16 @@ require 'openssl'
 module Primecontext
 
   class Api
-    attr_reader :options
+    attr_reader :options, :data
 
     def initialize(options = {})
       @options = Primecontext::default_options.merge(options)
+      @data = { user_id: @options[:user_id] }
     end
 
     def new_record(data = {})
-      data.merge!({ 'sign' => generate_sign(data) })
+      @data = @data.merge(data)
+      @data.merge!({ 'sign' => generate_sign(@data) })
       send_request(data)
     end
 
